@@ -1,5 +1,8 @@
 package com.example.accessingdatajpa;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 
 /**
@@ -10,6 +13,8 @@ import javax.persistence.*;
  * @Create 2021-11-12 11:19
  * @Blog https://www.cnblogs.com/WLCYSYS/
  **/
+@DynamicInsert
+@DynamicUpdate
 @Entity
 public class Customer {
     @Id
@@ -36,6 +41,12 @@ public class Customer {
         this.lastName = lastName;
     }
 
+    public Customer(long id,String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
 
     public Long getId() {
         return id;
@@ -49,9 +60,14 @@ public class Customer {
         return lastName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     @Override
     public String toString() {
         return String.format("Customer[id=%d, firstName='%s', lastName=%s]", id, firstName, lastName);
     }
+
 
 }
